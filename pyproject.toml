@@ -1,56 +1,55 @@
 [project]
 name = "pytune_llm_proxy"
-version = "0.0.0"
-description = "PyTune LLM proxy microservice"
-requires-python = ">=3.12"
-
-[tool.poetry]
-name = "pytune_llm_proxy"
 version = "1.0.1"
-description = "Microservice for LLM exchange"
-authors = ["Gabriel de Fombelle <gabriel.de.fombelle@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{ include = "app" }]
+description = "PyTune LLM proxy microservice"
+requires-python = ">=3.12,<3.13"
 
-[tool.poetry.dependencies]
-python = ">=3.12,<4.0"
+dependencies = [
+    # API stack
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "pydantic>=2.8.0",
+    "python-multipart>=0.0.12",
 
-# API stack
-fastapi = "^0.115.0"
-uvicorn = { extras = ["standard"], version = "^0.34.0" }
-pydantic = "^2.8.0"
-python-multipart = "^0.0.12"
+    # Networking / security
+    "httpx>=0.27.2",
+    "openai>=1.35.0",
+    "cryptography>=43.0.0",
+    "python-jose>=3.3.0",
+    "passlib>=1.7.4",
+    "bcrypt>=4.1.2",
+    "python-dotenv>=1.0.1",
 
-# Networking / security
-httpx = "^0.27.2"
-openai = "^1.35.0"
-cryptography = "^43.0.0"
-python-jose = "^3.3.0"
-passlib = "^1.7.4"
-bcrypt = "^4.1.2"
-python-dotenv = "^1.0.1"
+    # Async / infra
+    "redis>=5.0.7",
+    "asyncpg>=0.30.0",
+    "aiosmtplib>=1.1.7",
+    "jinja2>=3.1.4",
 
-# Async / infra
-redis = "^5.0.7"
-asyncpg = "^0.30.0"          # garde si ce service parle à Postgres (sinon supprime)
-aiosmtplib = "^1.1.7"        # garde si envoi d'emails (sinon supprime)
-jinja2 = "^3.1.4"
+    # ---- Dépendances internes PyTune (directes) ----
+    "pytune_auth_common",
+    "pytune_configuration",
+    "pytune_llm",
+    "simple_logger",
+    "pytune_data",
+    "pytune_chat",
+    "pytune-helpers-images",
+    "pytune_helpers_messaging",
+]
 
-# internes (DEV, en editable + PROD)
-pytune_auth_common = { git = "https://github.com/gdefombelle/pytune_auth_common.git" , branch = "main"}
-pytune_llm = { git = "https://github.com/gdefombelle/pytune_llm.git", branch = "main" }
-simple_logger = { git = "https://github.com/gdefombelle/simple_logger.git", branch = "main"}
-pytune_data = { git  = "https://github.com/gdefombelle/pytune_data.git", branch = "main"}
+# [tool.uv]
+# package = false  
 
-
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.0"
-pytest-asyncio = "^0.23.8"
-ruff = "^0.6.8"
-mypy = "^1.11.1"
-
-[build-system]
-requires = ["poetry-core>=1.9.0"]
-build-backend = "poetry.core.masonry.api"
+# [tool.uv.sources]
+# simple_logger            = { path = "packages/simple_logger" }
+# pytune_auth_common       = { path = "packages/pytune_auth_common" }
+# pytune_chat              = { path = "packages/pytune_chat" }
+# pytune_configuration     = { path = "packages/pytune_configuration" }
+# pytune_data              = { path = "packages/pytune_data" }
+# pytune_dsp               = { path = "packages/pytune_dsp" }
+# pytune_helpers_core      = { path = "packages/pytune_helpers_core" }
+# pytune_helpers_images    = { path = "packages/pytune_helpers_images" }
+# pytune_helpers_messaging = { path = "packages/pytune_helpers_messaging" }
+# pytune_llm               = { path = "packages/pytune_llm" }
+# pytune_piano_i2i         = { path = "packages/pytune_piano_i2i" }
+# pytune_qdrant            = { path = "packages/pytune_qdrant" }

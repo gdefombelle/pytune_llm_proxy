@@ -23,11 +23,11 @@ logger : SimpleLogger = get_logger("llm")
 # Charger les métadonnées depuis pyproject.toml
 pyproject_path = FilePath(__file__).resolve().parent.parent / "pyproject.toml"
 pyproject_data = toml.load(pyproject_path)
+project_metadata = pyproject_data.get("project", {})
 
-project_metadata = pyproject_data["tool"]["poetry"]
-PROJECT_TITLE = project_metadata.get("name", "PyTune LLM Proxy")
-PROJECT_VERSION = project_metadata.get("version", "0.0.1")
-PROJECT_DESCRIPTION = project_metadata.get("description", "LLM Proxy")
+PROJECT_TITLE = project_metadata.get("name", "Unknown Service")
+PROJECT_VERSION = project_metadata.get("version", "0.0.0")
+PROJECT_DESCRIPTION = project_metadata.get("description", "")
 
 
 ### START USER SERVICE ####
