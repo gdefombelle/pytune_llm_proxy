@@ -18,7 +18,7 @@ class VisionMessage(BaseModel):
 
 
 class VisionRequest(BaseModel):
-    model: Optional[str] = "gpt-4o"
+    model: Optional[str] = "gpt-5-mini"
     prompt: str
     image_urls: List[HttpUrl]
     cache: Optional[bool] = True

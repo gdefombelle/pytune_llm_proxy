@@ -75,12 +75,21 @@ logger.info(f"allowed_origins: {allowed_origins}")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_credentials=True,  # 🔥 indispensable pour cookies
+    allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["Authorization", "Content-Type", "Accept", "Origin"],  # 🔥 pour Bearer + POST/JSON + Files Upload
-    expose_headers=["Authorization"]  # (optionnel) si tu veux lire le header dans la réponse
+    allow_headers=[
+        "Authorization",
+        "X-Refresh-Token",
+        "Content-Type",
+        "Accept",
+        "Origin",
+        "Cache-Control",
+    ],
+    expose_headers=[
+        "Authorization",
+        "X-Refresh-Token",
+    ],
 )
-
 
 try:
     app.add_middleware(

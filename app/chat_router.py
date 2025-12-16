@@ -17,7 +17,7 @@ class Message(BaseModel):
     content: str
 
 class ChatRequest(BaseModel):
-    model: Optional[str] = "gpt-4o-mini"
+    model: Optional[str] = "gpt-5-mini"
     messages: List[Message]
     cache: Optional[bool] = True
 
