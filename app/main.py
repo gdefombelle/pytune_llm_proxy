@@ -84,6 +84,7 @@ app.add_middleware(
         "Accept",
         "Origin",
         "Cache-Control",
+        "X-User-Lang",
     ],
     expose_headers=[
         "Authorization",
